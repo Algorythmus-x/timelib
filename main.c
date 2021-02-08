@@ -1,15 +1,12 @@
 /**
  * Tag des Jahres
  * Autor: Armin
- * Datum: 25.01.2021
+ * Datum: 08.02.2021
  **/
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int year = 0;
-int month = 0;
-int day = 0;
 int day_of_the_year(int day, int month, int year);
 int get_days_for_month(int month, int year);
 int exists_date(int day, int month, int year);
@@ -68,25 +65,28 @@ int exists_date(int day, int month, int year){
     }
 }
 
-void input_date(){
+void input_date(int *year, int *month, int *day){
     do{
-        day = 0;
-        month = 0;
-        year = 0;
+        int day1 = 0;
+        int month1 = 0;
+        int year1 = 0;
         printf("Bitte geben Sie das Jahr an: ");
-        scanf("%i", &year);
+        scanf("%i", &year1);
+        *year = year1;
         fflush(stdin);
 
         printf("Bitte geben Sie den Monat ein: ");
-        scanf("%i", &month);
+        scanf("%i", &month1);
+        *month = month1;
         fflush(stdin);
 
         printf("Bitte geben Sie den Tag ein: ");
-        scanf("%i", &day);
+        scanf("%i", &day1);
+        *day = day1;
         fflush(stdin);
     }
-    while(exists_date(day, month, year) != 1);
-    
+    while(exists_date(*day, *month, *year) != 1);
+
 }
 
 int day_of_the_year(int day, int month, int year){
@@ -99,7 +99,10 @@ int day_of_the_year(int day, int month, int year){
 }
 
 int main(){
-    input_date();
+    int year = 0;
+    int month = 0;
+    int day = 0;
+    input_date(&year, &month, &day);
     printf("Tag des Jahres: %i\n", day_of_the_year(day, month, year));
     return 0;
 }
