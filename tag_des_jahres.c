@@ -32,18 +32,18 @@ int get_days_for_month(int month, int year){
     return daysPerMonth[(month) - 1];
 }
 
-int exists_date(int day, int month, int year){
-    if(is_leapyear(year) == -1){
+int exists_date(struct dateStruct date){
+    if(is_leapyear(date.year) == -1){
         printf("Ungueltiges Jahr\n\n");
         return 0;
     }
-    if(month <= 0 || month > 12){
+    if(date.month <= 0 || date.month > 12){
         printf("Ungueltiger Monat\n\n");
         return 0;
     }
     else {
         //Überprüfung ob Tag gültig ist
-        if(day <= 0 || day > get_days_for_month(month, year)){
+        if(date.day <= 0 || date.day > get_days_for_month(date.month, date.year)){
             printf("Ungueltiger Tag\n\n");
             return 0;
         }
@@ -53,32 +53,30 @@ int exists_date(int day, int month, int year){
     }
 }
 
-void input_date(int *year, int *month, int *day){
+struct dateStruct input_date(){
+    struct dateStruct date;
     do{
-        *day = 0;
-        *month = 0;
-        *year = 0;
         printf("Bitte geben Sie das Jahr an: ");
-        scanf("%i", year);
+        scanf("%i", &date.year);
         fflush(stdin);
 
         printf("Bitte geben Sie den Monat ein: ");
-        scanf("%i", month);
+        scanf("%i", &date.month);
         fflush(stdin);
 
         printf("Bitte geben Sie den Tag ein: ");
-        scanf("%i", day);
+        scanf("%i", &date.day);
         fflush(stdin);
     }
-    while(exists_date(*day, *month, *year) != 1);
-
+    while(exists_date(date) != 1);
+    return date;
 }
 
-int day_of_the_year(int day, int month, int year){
+int day_of_the_year(struct dateStruct date){
     int sumDays = 0;
-    for(int i = 1; i < month;i++){
-        sumDays = sumDays + get_days_for_month(i, year);
+    for(int i = 1; i < date.month; i++){
+        sumDays = sumDays + get_days_for_month(i, date.year);
     }
-    sumDays = sumDays + day;
+    sumDays = sumDays + date.day;
     return sumDays;
 }
