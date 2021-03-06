@@ -1,3 +1,9 @@
+/**
+ * Tag des Jahres
+ * Header Datei für ausgelagerte Funktionenen
+ * Autor: Armin
+ * Datum: 06.03.2021
+ **/
 #ifndef TAG_DES_JAHRES_H_INCLUDED
 #define TAG_DES_JAHRES_H_INCLUDED
 
